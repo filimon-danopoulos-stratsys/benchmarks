@@ -4,13 +4,13 @@ const exec = (command) => execSync(command).toString().trim()
 const fs = require('fs')
 
 const benchmarks = [
-  'for',
-  'while',
-  'for-of',
-  'forEach',
-  'reduce',
+  'array',
+  'object',
+  'object-in',
+  'set',
+  'map'
 ]
-const iterations = [10, 100, 1000, 10000, 100000, 1000000]
+const iterations = [10, 100, 1000]
 
 
 const result = {}
