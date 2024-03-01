@@ -4,7 +4,7 @@ const exec = (command) => execSync(command).toString().trim()
 
 const args = process.argv.slice(2)
 
-const runs = 20
+const runs = 10
 let result = []
 for(let i = 0; i < runs; i++) {
   result.push(+(exec(`node ${args[0]} ${args[1]}`)))
