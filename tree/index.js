@@ -1,0 +1,39 @@
+const args = process.argv.slice(2)
+
+let count = 0
+const generateIntTree = (depth) => {
+  return Array.from({length: 5}, () => depth ? generateIntTree(depth-1) : count++)
+}
+const intTree = generateIntTree(parseInt(args[0], 10) - 1)
+
+const traverse = (node, action, path = []) => {
+  if (Array.isArray(node)) {
+    return {
+      children: node.map((child, i) => traverse(child, action, path.concat([i]))),
+      path 
+    }
+  }
+  return action(node, path)
+}
+
+const objs = traverse(intTree, (value, path) => ({
+  value,
+  path
+}))
+
+const target = '2'.repeat(parseInt(args[0], 10)).split('')
+
+const start = performance.now()
+
+let node = objs
+const length = target.length
+for(let i = 0; i < length; i++) {
+  node = node.children[target[i]]
+}
+node.value = -1
+
+const end = performance.now()
+
+module.exports = node
+
+console.log(end - start);
