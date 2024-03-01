@@ -6,16 +6,13 @@ const start = performance.now()
 
 const cache = new Map()
 const fib = (x) => {
-  if (x < 2) {
-    return x
-  }
+  if (x < 2) return x
   
   let cached = cache.get(x)
   if (!cached) {
     cached = fib(x - 1) + fib(x - 2)
     cache.set(x, cached)
   }
-
   return cached
 }
 
