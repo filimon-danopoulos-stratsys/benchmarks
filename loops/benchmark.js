@@ -10,7 +10,7 @@ const benchmarks = [
   'forEach',
   'reduce',
 ]
-const iterations = [10, 100, 1000, 10000, 100000, 1000000]
+const iterations = [10000, 100000, 1000000]
 
 
 const result = {}
