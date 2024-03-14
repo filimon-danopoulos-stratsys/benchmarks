@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="http://frontend-packages.svc.stratsys.com/pdr/11/pdr.css">
+  <script src="http://frontend-packages.svc.stratsys.com/pdr/11/pdr.js"></script>
+</head>
+<body>
+  <script type="module">
+    const response = await fetch('./result.json')
+    const data = await response.json()
+
+    const colors = [
+      '#7dbbea',
+      '#c6ff1a',
+      '#36bdbb',
+      '#c56fbc',
+      '#58b997',
+    ]
+
+    const keys = Object.keys(data['mutate'])
+    const series = Object.entries(data).reduce((result, [name, data]) => result.concat([{
+        type: "column",
+        name,
+        color: colors.pop(),
+        showPointLabels: false,
+        data: Object.entries(data).reduce((arr, [key, value]) => arr.concat([{
+          key, value
+        }]), [])
+      }])
+    , [])
+
+    const chart = Object.assign(document.createElement('one-ux-plot-chart'), {keys, series })
+    chart.style.width = chart.style.height = '400px'
+    document.body.appendChild(chart)
+
+  </script>
+</body>
+</html>
